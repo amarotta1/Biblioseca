@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+  assembly="Biblioseca.Model"
+  namespace="Biblioseca.Model">
+	<class name="Author" table="Authors">
+		<id name="Id">
+			<generator class="identity" />
+		</id>
+		<property name="FirstName">
+			<column name="FirstName" length="200" not-null="true" />
+		</property>
+		<property name="LastName">
+			<column name="LastName" length="200" not-null="true" />
+		</property>
+	</class>
+	<!--Recordar ir a propiedades del archivo y seleccionar que sea un recurso incrustado-->
+</hibernate-mapping>

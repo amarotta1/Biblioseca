@@ -60,10 +60,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Author.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="Loan.cs" />
+    <Compile Include="Partner.cs" />
+    <Compile Include="Penalty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\author.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

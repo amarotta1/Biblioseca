@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Biblioseca.Model
 {
-    public class Author
+    class Partner
     {
-        public virtual int Id { get; set; } //virtual para que NHibernate pueda usarlas. Solo NHibernate lo necesita para sobreescribir
+        public virtual int Id { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
+        public virtual string UserName { get; set; }
     }
 }
