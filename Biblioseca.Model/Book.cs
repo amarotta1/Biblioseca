@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioseca.Model
 {
-    class Book
+    public class Book
     {
         public virtual int Id { get; set; }
         public virtual string title { get; set; }
