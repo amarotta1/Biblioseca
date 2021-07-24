@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BF035AA-FA24-4C05-9874-FDD4A0302437}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>BibliosecaConsoleApp</RootNamespace>
-    <AssemblyName>BibliosecaConsoleApp</AssemblyName>
+    <ProjectGuid>{6B81656F-2C6A-4AE1-B11D-023F76AB4086}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Biblioseca.DataAccess</RootNamespace>
+    <AssemblyName>Biblioseca.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -61,22 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="AuthorDao.cs" />
+    <Compile Include="Dao.cs" />
+    <Compile Include="IDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Biblioseca.DataAccess\Biblioseca.DataAccess.csproj">
-      <Project>{6b81656f-2c6a-4ae1-b11d-023f76ab4086}</Project>
-      <Name>Biblioseca.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Biblioseca.Model\Biblioseca.Model.csproj">
       <Project>{948ad0cc-1558-41b2-b806-5a7cfa150b92}</Project>
       <Name>Biblioseca.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
