@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using NHibernate.Cfg;
+using System;
 
 namespace TestBiblioseca
 {
@@ -44,8 +45,10 @@ namespace TestBiblioseca
 
             loan.partner = this.partner;
             loan.book = this.book;
-            loan.initialDate = System.DateTime.Now.Date;
-            loan.finishDate = System.DateTime.Now.Date.AddDays(2);
+            loan.initialDate = DateTime.Now.Date;
+            loan.finishDate = DateTime.Now.Date.AddDays(2);
+            //loan.returnedDate = null;
+            
 
             this.session.Save(loan);
             this.session.Flush();
@@ -60,12 +63,7 @@ namespace TestBiblioseca
             Assert.AreEqual(loan.initialDate, created.initialDate);
 
             Assert.AreEqual(loan.finishDate, created.finishDate);
-
-
-
-
-
-
+                        
         }
     }
 }

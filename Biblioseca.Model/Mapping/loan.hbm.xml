@@ -13,13 +13,13 @@
 			<column name="bookID" sql-type ="int" not-null="true" />
 		</many-to-one>
 		<property name="initialDate">
-			<column name="initialDate" sql-type ="date" not-null="true" />
+			<column name="initialDate" sql-type ="datetime" not-null="true" />
 		</property>
 		<property name="finishDate">
-			<column name="finishDate" sql-type ="date" not-null="true" />
+			<column name="finishDate" sql-type ="datetime" not-null="true" />
 		</property>
 		<property name="returnedDate">
-			<column name="returnedDate" sql-type ="date" not-null="false" />
+			<column name="returnedDate" sql-type ="datetime" not-null="false" default ="NULL"/>
 		</property>
 	</class>
 	<!--Recordar ir a propiedades del archivo y seleccionar que sea un recurso incrustado-->

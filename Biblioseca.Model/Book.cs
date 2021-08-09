@@ -11,9 +11,20 @@ namespace Biblioseca.Model
         public virtual int Id { get; set; }
         public virtual string title { get; set; }
         public virtual string description { get; set; }
-        public virtual int isbn { get; set; }
+        public virtual string isbn { get; set; }
         public virtual Author author { get; set; }
         public virtual Category category { get; set; }
+        public virtual int stock { get; set; }
+
+        public virtual void DecreaseStock()
+        {
+            stock -= 1;
+        }
+
+        public virtual void IncreaseStock()
+        {
+            stock += 1;
+        }
 
     }
 }

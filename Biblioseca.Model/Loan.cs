@@ -13,6 +13,14 @@ namespace Biblioseca.Model
         public virtual Book book { get; set; }
         public virtual DateTime initialDate { get; set; } //dia retirado
         public virtual DateTime finishDate { get; set; } //dia supuesto a devolver
-        public virtual DateTime returnedDate { get; set; } //dia devuelto si es Null significa que no se devolvio
+        public virtual DateTime? returnedDate { get; set; } //dia devuelto si es Null significa que no se devolvio
+        // El ? es para que acepte nulos
+
+        public virtual void Returned()
+        {
+            returnedDate = DateTime.Now;
+        }
     }
+
+    
 }

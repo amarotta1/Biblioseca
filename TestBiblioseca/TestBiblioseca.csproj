@@ -69,19 +69,26 @@
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookDaoTest.cs" />
+    <Compile Include="AuthorDaoTest.cs" />
     <Compile Include="BookTest.cs" />
+    <Compile Include="LoanDaoTest.cs" />
+    <Compile Include="CategoryDaoTest.cs" />
     <Compile Include="LoanTest.cs" />
     <Compile Include="PartnerTest.cs" />
     <Compile Include="AuthorTest.cs" />
     <Compile Include="CategoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PenaltyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Biblioseca.DataAccess\Biblioseca.DataAccess.csproj">
+      <Project>{6b81656f-2c6a-4ae1-b11d-023f76ab4086}</Project>
+      <Name>Biblioseca.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biblioseca.Model\Biblioseca.Model.csproj">
       <Project>{948ad0cc-1558-41b2-b806-5a7cfa150b92}</Project>
       <Name>Biblioseca.Model</Name>

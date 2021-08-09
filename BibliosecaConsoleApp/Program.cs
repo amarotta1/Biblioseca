@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Biblioseca.Model;
 using NHibernate;
 using NHibernate.Cfg;
 using Biblioseca.DataAccess;
-
-
+using NHibernate.Context;
+using System.Collections.Generic;
+using Biblioseca.Model;
+using System.Linq;
+using Biblioseca.Service;
 
 namespace BibliosecaConsoleApp
 {
@@ -20,13 +18,21 @@ namespace BibliosecaConsoleApp
 
             ISession session = sessionFactory.OpenSession();
             //abre una conexion TCP contra el servidor
+            //ITransaction transaction = session.BeginTransaction();
+            CurrentSessionContext.Bind(session);
 
-            AuthorDao authorDao = new AuthorDao(sessionFactory);
+            LoanDao loanDao = new LoanDao(sessionFactory);
 
-            Console.WriteLine(authorDao.Get(1));
-            Console.ReadLine();
-            
-            session.Close();
+            IEnumerable<Loan> list = loanDao.GetActualLoansByBookId(155);
+            Console.WriteLine(list.Count());
+
+            BookDao bookDao = new BookDao(sessionFactory);
+            BookService bookService = new BookService(bookDao);
+
+            Console.WriteLine(bookService.ISBNVerification(bookDao.Get(1).isbn));
+
+            Console.ReadKey();
+
 
         }
     }

@@ -37,7 +37,7 @@ namespace TestBiblioseca
             b1.category = session.Get<Category>(1);
             b1.description = "Es un libro de prueba";
             b1.title = "Prueba";
-            b1.isbn = 97884;
+            b1.isbn = "5698746123469";
 
             this.session.Save(b1);
             this.session.Flush();

@@ -33,8 +33,8 @@ namespace TestBiblioseca
         {
             Author author = new Author
             {
-                FirstName = "Wanda",
-                LastName = "Maximoff"
+                FirstName = "Juan",
+                LastName = "Perez"
             };
 
             this.session.Save(author);
@@ -44,7 +44,7 @@ namespace TestBiblioseca
             Assert.IsTrue(author.Id > 0);
 
             Author created = this.session.Get<Author>(author.Id);
-
+            
             Assert.AreEqual(author.Id, created.Id);
         }
     }
