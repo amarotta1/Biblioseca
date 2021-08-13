@@ -27,6 +27,23 @@ namespace Biblioseca.Service
             return book.stock > 0;
         }
 
+        public IEnumerable<Book> GetAllAvailableBooks()
+        {
+            return bookDao.GetAllAvailableBooks(); //Donde el stock sea mayor  a cero
+        }
+
+        public Book GetBook(int bookId)
+        {
+            CheckService.BusinessLogic(bookId <= 0, "Book.Id debe ser mayor que 0.");
+
+            Book book = this.bookDao.Get(bookId);
+            CheckService.Exists(book);
+
+            return book;
+        }
+
+
+
         public bool ISBNVerification(string ISBN)
         {
             return Regex.IsMatch(ISBN, @"^\d{13}$"); //Expresion regular 13 numeros cualquiera

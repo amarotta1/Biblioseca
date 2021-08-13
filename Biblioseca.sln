@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioseca.DataAccess", "Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioseca.Service", "Biblioseca.Service\Biblioseca.Service.csproj", "{38281DAE-CBE7-4713-A1C7-A931ED62FDB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioseca.Web", "Biblioseca.Web\Biblioseca.Web.csproj", "{EC83D914-56A5-4FCB-82EA-48F0CF1F357E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{38281DAE-CBE7-4713-A1C7-A931ED62FDB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38281DAE-CBE7-4713-A1C7-A931ED62FDB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38281DAE-CBE7-4713-A1C7-A931ED62FDB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC83D914-56A5-4FCB-82EA-48F0CF1F357E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC83D914-56A5-4FCB-82EA-48F0CF1F357E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC83D914-56A5-4FCB-82EA-48F0CF1F357E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC83D914-56A5-4FCB-82EA-48F0CF1F357E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

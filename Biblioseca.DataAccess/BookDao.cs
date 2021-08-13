@@ -39,6 +39,13 @@ namespace Biblioseca.DataAccess
             return criteria.List<Book>();
         }
 
+        public virtual IEnumerable<Book> GetAllAvailableBooks()
+        {
+            ICriteria criteria = this.Session.CreateCriteria<Book>();
+            criteria.Add(Restrictions.Gt("stock",0)); //greater than
+            return criteria.List<Book>();
+        }
+
 
     }
 }

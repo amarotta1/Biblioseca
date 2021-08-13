@@ -96,13 +96,21 @@ namespace TestBiblioseca
         {
             AuthorDao authorDao = new AuthorDao(this.sessionFactory);
 
+            Author author = new Author
+            {
+                FirstName = "Akira",
+                LastName = "Toriyama"
+            };
+
+            authorDao.Save(author);
+
             IDictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("FirstName", "%Akira%");
 
-            Author author = authorDao.GetUniqueByHqlQuery("FROM Author WHERE FirstName LIKE :FirstName", parameters);
+            Author author1 = authorDao.GetUniqueByHqlQuery("FROM Author WHERE FirstName LIKE :FirstName", parameters);
 
-            Assert.IsNotNull(author);
-            Assert.AreEqual("Akira", author.FirstName);
+            Assert.IsNotNull(author1);
+            Assert.AreEqual("Akira", author1.FirstName);
         }
 
         [TestMethod]
@@ -110,11 +118,19 @@ namespace TestBiblioseca
         {
             AuthorDao authorDao = new AuthorDao(this.sessionFactory);
 
-            IDictionary<string, object> parameters = new Dictionary<string, object> { { "FirstName", "Akira" } };
-            Author author = authorDao.GetUniqueByQuery(parameters);
+            Author author = new Author
+            {
+                FirstName = "Akira",
+                LastName = "Toriyama"
+            };
 
-            Assert.IsNotNull(author);
-            Assert.AreEqual("Akira", author.FirstName);
+            authorDao.Save(author);
+
+            IDictionary<string, object> parameters = new Dictionary<string, object> { { "FirstName", "Akira" } };
+            Author author1 = authorDao.GetUniqueByQuery(parameters);
+
+            Assert.IsNotNull(author1);
+            Assert.AreEqual("Akira", author1.FirstName);
         }
     }
 }

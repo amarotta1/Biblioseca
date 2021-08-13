@@ -36,7 +36,7 @@ namespace Biblioseca.DataAccess
 
             return criteria.List<Loan>();
         }
-        public IEnumerable<Loan> GetActualLoansByPartnerID(int partnerId)
+        public virtual IEnumerable<Loan> GetActualLoansByPartnerID(int partnerId)
         {
             ICriteria criteria = this.Session
                 .CreateCriteria<Loan>();
@@ -60,7 +60,7 @@ namespace Biblioseca.DataAccess
             return criteria.List<Loan>();
         }
 
-        public virtual Loan GetUniqueLoan(int bookID, int partnerID)
+        public virtual Loan GetUniqueLoanByBookAndPartner(int bookID, int partnerID)
         {
             ICriteria criteria = this.Session
                 .CreateCriteria<Loan>();
@@ -72,7 +72,6 @@ namespace Biblioseca.DataAccess
 
             return criteria.UniqueResult<Loan>();
         }
-
 
     }
 }

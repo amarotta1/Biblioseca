@@ -18,7 +18,7 @@ namespace Biblioseca.DataAccess
             get { return this.sessionFactory.GetCurrentSession(); }
         }
 
-        public void Save(T entity)
+        public virtual void Save(T entity)
         {
             this.sessionFactory
                 .GetCurrentSession()
@@ -32,7 +32,7 @@ namespace Biblioseca.DataAccess
                 .Delete(entity);
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return this.sessionFactory
                 .GetCurrentSession()
@@ -56,7 +56,9 @@ namespace Biblioseca.DataAccess
                 query.SetParameter(keyValue.Key, keyValue.Value);
             }
 
-            return query.UniqueResult<T>();
+            // return query.UniqueResult<T>(); Si la Query trae mas de 1 resultado falla
+
+            return query.List<T>()[0];
         }
 
         public T GetUniqueByQuery(IDictionary<string, object> parameters)
@@ -67,8 +69,8 @@ namespace Biblioseca.DataAccess
             {
                 criteria.Add(Restrictions.Eq(keyValue.Key, keyValue.Value));
             }
-
-            return criteria.UniqueResult<T>();
+            // return criteria.UniqueResult<T>();
+            return criteria.List<T>()[0];
         }
  
     }

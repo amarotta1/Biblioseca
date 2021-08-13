@@ -14,11 +14,41 @@ namespace Biblioseca.Service
         private readonly BookDao bookDao;
         private readonly PartnerDao partnerDao;
         
-        public LoanService(LoanDao borrowDao, BookDao bookDao, PartnerDao partnerDao)
+        public LoanService(LoanDao loanDao, BookDao bookDao, PartnerDao partnerDao)
         {
-            this.loanDao = borrowDao;
+            this.loanDao = loanDao;
             this.bookDao = bookDao;
             this.partnerDao = partnerDao;
+        }
+
+        public IEnumerable<Loan> GetAllLoan()
+        {
+            return loanDao.GetAll();
+        }
+
+        public IEnumerable<Loan> GetAllLoansByPartnerID(int partnerId)
+        {
+           
+            return loanDao.GetAllLoansByPartnerID(partnerId);
+        }
+        public IEnumerable<Loan> GetActualLoansByPartnerID(int partnerId)
+        {
+            return loanDao.GetActualLoansByBookId(partnerId);
+        }
+
+        public IEnumerable<Loan> GetByPartnerLastName(string partnerLastName)
+        {
+           return loanDao.GetByPartnerLastName(partnerLastName);
+        }
+
+        public virtual IEnumerable<Loan> GetActualLoansByBookId(int bookId)
+        {
+           return loanDao.GetActualLoansByBookId(bookId);
+        }
+
+        public virtual Loan GetUniqueLoan(int bookID, int partnerID)
+        {
+            return loanDao.GetUniqueLoanByBookAndPartner(bookID,partnerID);
         }
 
         public Loan LoanABook(int bookId, int partnerId)
@@ -27,11 +57,11 @@ namespace Biblioseca.Service
             CheckService.Exists(book);
 
             Partner partner = partnerDao.Get(partnerId);
-            CheckService.Exists(partner);
+            CheckService.Exists(partner);            
             
-            CheckService.BusinessLogic( loanDao.GetActualLoansByPartnerID(partner.Id).Count()> 2, "Limite de libros alcanzado ");
+            CheckService.BusinessLogic(loanDao.GetActualLoansByPartnerID(partnerId).Count()>= 2, "Limite de libros alcanzado");
 
-            CheckService.BusinessLogic(book.stock <= 0, "El libro no tiene stock"); //podria usar el BookService
+            CheckService.BusinessLogic(book.stock <= 0, "El libro no tiene stock"); //podria usar el BookService?
          
             /*
             IEnumerable<Loan> loans = loanDao.GetActualLoansByBookId(bookId);
@@ -64,7 +94,7 @@ namespace Biblioseca.Service
             Partner partner = partnerDao.Get(partnerID);
             CheckService.Exists(partner);
 
-            Loan loan = loanDao.GetUniqueLoan(bookID,partnerID);
+            Loan loan = loanDao.GetUniqueLoanByBookAndPartner(bookID,partnerID);
             CheckService.Exists(loan);
 
             loan.Returned();
@@ -72,6 +102,7 @@ namespace Biblioseca.Service
             book.IncreaseStock();
 
             loanDao.Save(loan);
+            bookDao.Save(book);
 
             return true;
 

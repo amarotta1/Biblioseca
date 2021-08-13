@@ -17,6 +17,7 @@ namespace TestBiblioseca
         private ISessionFactory sessionFactory;
         private ISession session;
         private ITransaction transaction;
+        private LoanDao loanDao;
 
         [TestInitialize]
         public void SetUp()
@@ -25,6 +26,8 @@ namespace TestBiblioseca
             this.session = this.sessionFactory.OpenSession();
             this.transaction = this.session.BeginTransaction();
             CurrentSessionContext.Bind(this.session);
+
+            this.loanDao = new LoanDao(this.sessionFactory);
         }
 
         [TestCleanup]
@@ -34,11 +37,10 @@ namespace TestBiblioseca
             this.session.Close();
         }
 
+        
         [TestMethod]
         public void GetAll()
         {
-            LoanDao loanDao = new LoanDao(this.sessionFactory);
-
             IEnumerable<Loan> authors = loanDao.GetAll();
 
             Assert.IsTrue(authors.Any());
@@ -47,9 +49,7 @@ namespace TestBiblioseca
         public void GetOne()
         {
 
-            LoanDao loanDao = new LoanDao(this.sessionFactory);
             Loan loan = loanDao.Get(12);
-
             Assert.IsNotNull(loan);
 
         }
@@ -57,14 +57,58 @@ namespace TestBiblioseca
         public void GetByPartnerId()
         {
             PartnerDao partnerDao = new PartnerDao(this.sessionFactory);
-            LoanDao loanDao = new LoanDao(this.sessionFactory);
-
+            
             Loan loan = loanDao.GetAllLoansByPartnerID(partnerDao.Get(1).Id).First();
 
             Assert.AreEqual(loan.partner.Id, 1);
 
         }
-        
+        [TestMethod]
+        public void GetByPartnerLastName()
+        {
+            IEnumerable<Loan> prestamos = loanDao.GetByPartnerLastName("Perez");
+            foreach (Loan loan in prestamos)
+            {
+                Assert.AreEqual("Perez", loan.partner.LastName);
+            }
+        }
+        [TestMethod]
+        public void GetActualLoansByPartnerId()
+        {
+            PartnerDao partnerDao = new PartnerDao(this.sessionFactory);
+
+            IEnumerable<Loan> actualLoans = loanDao.GetActualLoansByPartnerID(partnerDao.Get(1).Id);
+
+            foreach (Loan loan in actualLoans)
+            {
+                Assert.IsNull(loan.returnedDate);
+            }
+
+        }
+        [TestMethod]
+        public void GetActualLoansByBookId()
+        {
+            BookDao bookDao = new BookDao(this.sessionFactory);
+
+            IEnumerable<Loan> actualLoans = loanDao.GetActualLoansByBookId(bookDao.Get(1).Id);
+
+            foreach (Loan loan in actualLoans)
+            {
+                Assert.AreEqual(loan.book.Id,1);
+            }
+
+        }
+
+        [TestMethod]
+        public void GetUniqueByBookAndPartner()
+        {
+     
+            Loan borrow = loanDao.GetUniqueLoanByBookAndPartner(1, 1);
+
+            Assert.IsNotNull(borrow);
+        }
+
+
 
     }
 }

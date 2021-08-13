@@ -31,9 +31,47 @@ namespace BibliosecaConsoleApp
 
             Console.WriteLine(bookService.ISBNVerification(bookDao.Get(1).isbn));
 
+            AuthorDao authorDao = new AuthorDao(sessionFactory);
+
+            IDictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("FirstName", "%Juan%");
+
+            Author author1 = authorDao.GetUniqueByHqlQuery("FROM Author WHERE FirstName LIKE :FirstName", parameters);
+            Console.WriteLine(author1.ToString());
+
+            Console.WriteLine(loanDao.GetActualLoansByPartnerID(1).Count() >=2);
+            Console.WriteLine(GetLoans().Count() >= 2);
+            PartnerDao partnerDao = new PartnerDao(sessionFactory);
+
+            LoanService loanService = new LoanService(loanDao,bookDao,partnerDao);
+            loanService.LoanABook(1, 4568745);
+
+
             Console.ReadKey();
 
+            
 
+        }
+
+        private static IEnumerable<Loan> GetLoans()
+        {
+            List<Loan> loans = new List<Loan>
+            {
+                new Loan
+                {
+                    Id = 1
+                },
+                new Loan
+                {
+                    Id = 2
+                },
+                new Loan
+                {
+                    Id = 3
+                }
+            };
+
+            return loans;
         }
     }
 }

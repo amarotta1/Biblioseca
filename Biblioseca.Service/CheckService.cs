@@ -12,7 +12,7 @@ namespace Biblioseca.Service
         {
             if (modelObject == null)
             {
-                string message = $"El objeto de tipo {modelObject.GetType().ToString()} no existe";
+                string message = "El objeto no existe";
                 throw new Exception(message);
             }
         }

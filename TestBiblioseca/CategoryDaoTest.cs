@@ -103,6 +103,9 @@ namespace TestBiblioseca
         {
             CategoryDao categoryDao = new CategoryDao(this.sessionFactory);
 
+            Category cat1= new Category { name = "Terror" };
+            categoryDao.Save(cat1);
+
             IDictionary<string, object> parameters = new Dictionary<string, object> { { "name", "Terror" } };
             Category cat = categoryDao.GetUniqueByQuery(parameters);
 

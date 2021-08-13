@@ -165,6 +165,16 @@ namespace TestBiblioseca
             }
 
         }
+        [TestMethod]
+        public void GetAllAvaibleBooks()
+        {
+            IEnumerable<Book> books = bookDao.GetAllAvailableBooks();
+            foreach (Book book in books)
+            {
+                Assert.IsTrue(book.stock > 0);
+            }
 
+        }
+        
     }
 }
