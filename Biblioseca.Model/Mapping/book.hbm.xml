@@ -24,6 +24,9 @@
 		<property name="stock">
 			<column name="stock" sql-type="int" not-null="false"/>
 		</property>
+		<property name="Deleted">
+			<column name="Deleted" sql-type="bit"/>
+		</property>
 		
 	</class>
 	<!--Recordar ir a propiedades del archivo y seleccionar que sea un recurso incrustado-->

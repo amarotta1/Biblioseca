@@ -53,6 +53,20 @@ namespace TestBiblioseca
 
         }
         [TestMethod]
+        public void GetOneThatWasDeleted()
+        {
+            AuthorDao authorDao = new AuthorDao(this.sessionFactory);
+            Author author1 = authorDao.Get(1);
+            author1.MarkAsDeleted();
+
+            authorDao.Save(author1);
+
+            Author author2 = authorDao.Get(1);
+
+            Assert.IsNull(author2);
+
+        }
+        [TestMethod]
         public void Delete()
         {
             Author author = new Author

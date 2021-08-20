@@ -15,15 +15,21 @@ namespace Biblioseca.Model
         public virtual Author author { get; set; }
         public virtual Category category { get; set; }
         public virtual int stock { get; set; }
+        public virtual bool Deleted { get; set; }
+
+        public virtual void MarkAsDeleted()
+        {
+            this.Deleted = true;
+        }
 
         public virtual void DecreaseStock()
         {
-            stock -= 1;
+            this.stock -= 1;
         }
 
         public virtual void IncreaseStock()
         {
-            stock += 1;
+            this.stock += 1;
         }
 
     }

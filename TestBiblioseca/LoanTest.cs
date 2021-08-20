@@ -65,5 +65,27 @@ namespace TestBiblioseca
             Assert.AreEqual(loan.finishDate, created.finishDate);
                         
         }
+        [TestMethod]
+        public void IsDeleted()
+        {
+            Loan loan = new Loan();
+
+            loan.partner = this.partner;
+            loan.book = this.book;
+            loan.initialDate = DateTime.Now.Date;
+            loan.finishDate = DateTime.Now.Date.AddDays(2);
+            //loan.returnedDate = null;
+
+
+            this.session.Save(loan);
+
+            loan.MarkAsDeleted();
+            this.session.Save(loan);
+
+            Loan created = this.session.Get<Loan>(loan.Id);
+
+            Assert.IsTrue(created.Deleted);
+
+        }
     }
 }

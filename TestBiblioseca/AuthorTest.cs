@@ -47,5 +47,22 @@ namespace TestBiblioseca
             
             Assert.AreEqual(author.Id, created.Id);
         }
+        [TestMethod]
+        public void IsDeleted()
+        {
+            Author author = new Author
+            {
+                FirstName = "Juan",
+                LastName = "Perez"
+            };
+            this.session.Save(author);
+            this.session.Flush();
+            this.session.Clear();
+
+            author.MarkAsDeleted();
+            this.session.Save(author);
+            Author created = this.session.Get<Author>(author.Id);
+            Assert.IsTrue(created.Deleted);
+        }
     }
 }

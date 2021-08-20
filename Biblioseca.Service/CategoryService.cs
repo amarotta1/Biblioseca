@@ -42,7 +42,8 @@ namespace Biblioseca.Service
         {
             CheckService.BusinessLogic(categoryId <= 0, "El id de la Categoria debe ser mayor a cero");
             Category category = categoryDao.Get(categoryId);
-            categoryDao.Delete(category);
+            category.MarkAsDeleted();
+            categoryDao.Save(category);
             return true;
         }
 

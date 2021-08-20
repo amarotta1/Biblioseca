@@ -15,7 +15,12 @@ namespace Biblioseca.Model
         public virtual DateTime finishDate { get; set; } //dia supuesto a devolver
         public virtual DateTime? returnedDate { get; set; } //dia devuelto si es Null significa que no se devolvio
         // El ? es para que acepte nulos
+        public virtual bool Deleted { get; set; }
 
+        public virtual void MarkAsDeleted()
+        {
+            this.Deleted = true;
+        }
         public virtual void Returned()
         {
             returnedDate = DateTime.Now;

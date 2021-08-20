@@ -45,5 +45,25 @@ namespace TestBiblioseca
 
             Assert.AreEqual(category.Id, created.Id);
         }
+        [TestMethod]
+        public void IsDeleted()
+        {
+            Category category = new Category
+            {
+                name = "suspenso"
+            };
+
+            this.session.Save(category);
+            this.session.Flush();
+            this.session.Clear();
+
+            category.MarkAsDeleted();
+            this.session.Save(category);
+
+            Category created = this.session.Get<Category>(category.Id);
+
+            Assert.IsTrue(created.Deleted);
+
+        }
     }
 }

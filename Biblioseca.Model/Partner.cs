@@ -12,5 +12,11 @@ namespace Biblioseca.Model
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string UserName { get; set; }
+        public virtual bool Deleted { get; set; }
+
+        public virtual void MarkAsDeleted()
+        {
+            this.Deleted = true;
+        }
     }
 }

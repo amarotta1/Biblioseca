@@ -81,6 +81,7 @@
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorServiceTest.cs" />
     <Compile Include="BookServiceTest.cs" />
     <Compile Include="LoanServiceTest.cs" />
     <Compile Include="PartnerDaoTest.cs" />

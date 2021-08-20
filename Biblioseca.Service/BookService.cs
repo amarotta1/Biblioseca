@@ -29,7 +29,8 @@ namespace Biblioseca.Service
 
         public IEnumerable<Book> GetAllAvailableBooks()
         {
-            return bookDao.GetAllAvailableBooks(); //Donde el stock sea mayor  a cero
+            return bookDao.GetAllAvailableBooks(); //Donde el stock sea mayor  a cero y no deleted
+
         }
 
         public Book GetBook(int bookId)
@@ -42,13 +43,54 @@ namespace Biblioseca.Service
             return book;
         }
 
+        public Book Create(string title, string description, string isbn, Author author, Category cat, int stock = 0)
+        {
+            CheckService.BusinessLogic(!ISBNVerification(isbn), "El ISBN no es valido");
 
+            Book book = new Book();
+            book.title = title;
+            book.description = description;
+            book.isbn = isbn;
+            book.author = author;
+            book.category = cat;
+            book.stock = stock;
+            bookDao.Save(book);
+            return book;
+        }
 
         public bool ISBNVerification(string ISBN)
         {
             return Regex.IsMatch(ISBN, @"^\d{13}$"); //Expresion regular 13 numeros cualquiera
         }
 
-        
+        public bool Delete(int bookId)
+        {
+            CheckService.BusinessLogic(bookId <= 0, "El id del libro debe ser mayor a cero");
+            Book book = bookDao.Get(bookId);
+            CheckService.Exists(book);
+            book.MarkAsDeleted();
+            bookDao.Save(book);
+            return true;
+
+        }
+
+        public void Update(int bookId, string title, string description, string isbn, Author author, Category cat, int stock = 0)
+        {
+            CheckService.BusinessLogic(bookId <= 0, "El id del libro debe ser mayor a cero");
+            Book book = bookDao.Get(bookId);
+            CheckService.Exists(book);
+
+            CheckService.BusinessLogic(!ISBNVerification(isbn), "El ISBN no es valido");
+
+            book.title = title;
+            book.description = description;
+            book.isbn = isbn;
+            book.author = author;
+            book.category = cat;
+            book.stock = stock;
+            bookDao.Save(book);
+            
+        }
+
     }
 }

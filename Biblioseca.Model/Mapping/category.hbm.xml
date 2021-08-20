@@ -9,6 +9,9 @@
 		<property name="name">
 			<column name="name" length="50" not-null="true" />
 		</property>
+		<property name="Deleted">
+			<column name="Deleted" sql-type="bit"/>
+		</property>
 		
 	</class>
 	<!--Recordar ir a propiedades del archivo y seleccionar que sea un recurso incrustado-->

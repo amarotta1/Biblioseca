@@ -21,6 +21,9 @@
 		<property name="returnedDate">
 			<column name="returnedDate" sql-type ="datetime" not-null="false" default ="NULL"/>
 		</property>
+		<property name="Deleted">
+			<column name="Deleted" sql-type="bit"/>
+		</property>
 	</class>
 	<!--Recordar ir a propiedades del archivo y seleccionar que sea un recurso incrustado-->
 </hibernate-mapping>

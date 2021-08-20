@@ -51,6 +51,19 @@ namespace TestBiblioseca
 
         }
         [TestMethod]
+        public void GetOneThatWasDeleted()
+        {
+            Book book1 = bookDao.Get(1);
+            book1.MarkAsDeleted();
+
+            bookDao.Save(book1);
+
+            Book book2 = bookDao.Get(1);
+
+            Assert.IsNull(book2);
+
+        }
+        [TestMethod]
         public void Delete()
         {
             CategoryDao catDao = new CategoryDao(this.sessionFactory);

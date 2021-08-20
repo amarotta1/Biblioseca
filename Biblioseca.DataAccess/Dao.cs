@@ -20,9 +20,19 @@ namespace Biblioseca.DataAccess
 
         public virtual void Save(T entity)
         {
-            this.sessionFactory
-                .GetCurrentSession()
-                .Save(entity);
+            this.Session
+                .SaveOrUpdate(entity);
+
+            ITransaction transaction = Session.GetCurrentTransaction();
+
+            if (transaction == null)
+            {
+                transaction = Session.BeginTransaction();
+                transaction.Commit();
+            }
+            
+            //Session.GetCurrentTransaction().Commit();
+            
         }
 
         public void Delete(T entity)
@@ -34,19 +44,22 @@ namespace Biblioseca.DataAccess
 
         public virtual T Get(int id)
         {
-            return this.sessionFactory
-                .GetCurrentSession()
-                .Get<T>(id);
+            ICriteria criteria = this.Session.CreateCriteria(typeof(T));
+            criteria.Add(Restrictions.Eq("Id", id));
+            criteria.Add(Restrictions.Eq("Deleted", false));            
+
+            return criteria.UniqueResult<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
-            return this.sessionFactory
-                .GetCurrentSession()
-                .Query<T>();
+            ICriteria criteria = this.Session.CreateCriteria(typeof(T));
+            criteria.Add(Restrictions.Eq("Deleted",false));
+
+            return criteria.List<T>();
         }
 
-        public T GetUniqueByHqlQuery(string queryString, IDictionary<string, object> parameters)
+        public virtual T GetUniqueByHqlQuery(string queryString, IDictionary<string, object> parameters)
         {
             IQuery query = this.Session
                 .CreateQuery(queryString);
@@ -61,7 +74,7 @@ namespace Biblioseca.DataAccess
             return query.List<T>()[0];
         }
 
-        public T GetUniqueByQuery(IDictionary<string, object> parameters)
+        public virtual T GetUniqueByQuery(IDictionary<string, object> parameters)
         {
             ICriteria criteria = this.Session.CreateCriteria(typeof(T));
 

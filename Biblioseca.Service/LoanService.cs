@@ -107,5 +107,18 @@ namespace Biblioseca.Service
             return true;
 
         }
+
+        public bool Delete(int loanId)
+        {
+            CheckService.BusinessLogic(loanId <= 0, "El id del autor debe ser mayor a cero");
+            Loan loan = loanDao.Get(loanId);
+            CheckService.Exists(loan);
+            loan.MarkAsDeleted();
+            loanDao.Save(loan);
+            return true;
+
+        }
+
+
     }
 }

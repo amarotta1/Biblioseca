@@ -21,35 +21,27 @@ namespace BibliosecaConsoleApp
             //ITransaction transaction = session.BeginTransaction();
             CurrentSessionContext.Bind(session);
 
-            LoanDao loanDao = new LoanDao(sessionFactory);
-
-            IEnumerable<Loan> list = loanDao.GetActualLoansByBookId(155);
-            Console.WriteLine(list.Count());
-
-            BookDao bookDao = new BookDao(sessionFactory);
-            BookService bookService = new BookService(bookDao);
-
-            Console.WriteLine(bookService.ISBNVerification(bookDao.Get(1).isbn));
-
             AuthorDao authorDao = new AuthorDao(sessionFactory);
 
-            IDictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("FirstName", "%Juan%");
+            LoanDao lDao = new LoanDao(sessionFactory);
+            PartnerDao pDao = new PartnerDao(sessionFactory);
+            BookDao bDao = new BookDao(sessionFactory);
 
-            Author author1 = authorDao.GetUniqueByHqlQuery("FROM Author WHERE FirstName LIKE :FirstName", parameters);
-            Console.WriteLine(author1.ToString());
+            LoanService ls = new LoanService(lDao,bDao,pDao);
 
-            Console.WriteLine(loanDao.GetActualLoansByPartnerID(1).Count() >=2);
-            Console.WriteLine(GetLoans().Count() >= 2);
-            PartnerDao partnerDao = new PartnerDao(sessionFactory);
+            IEnumerable<Author> autores = authorDao.GetAll();
 
-            LoanService loanService = new LoanService(loanDao,bookDao,partnerDao);
-            loanService.LoanABook(1, 4568745);
-
-
-            Console.ReadKey();
-
+            foreach (Author a in autores)
+            {
+                Console.WriteLine(a.Id);
+            }
             
+            Console.ReadKey();
+           
+            // Book b = bDao.Get(1);
+            //b.IncreaseStock();
+           // bDao.Save(b);
+          
 
         }
 

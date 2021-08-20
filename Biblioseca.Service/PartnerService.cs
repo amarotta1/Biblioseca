@@ -60,15 +60,31 @@ namespace Biblioseca.Service
             partnerDao.Save(partner);
             return partner;
         }
-
+        
         public bool Delete(int partnerId)
         {
             CheckService.BusinessLogic(partnerId <= 0, "El id del socio debe ser mayor a cero");
             Partner partner = partnerDao.Get(partnerId);
             CheckService.Exists(partner);
-            partnerDao.Delete(partner);
+            partner.MarkAsDeleted();
+            partnerDao.Save(partner);
             return true;
 
+        }
+
+        public void Update(int partnerId,string name, string lastName, string userName)
+        {
+            CheckService.BusinessLogic(partnerId <= 0, "El id del socio debe ser mayor a cero");
+            Partner p = partnerDao.GetByUserName(userName);
+            CheckService.BusinessLogic(p != null, "El Nombre de usuario ya ha sido utilizado");
+            Partner partner = partnerDao.Get(partnerId);
+            CheckService.Exists(partner);
+
+            partner.FirstName = name;
+            partner.LastName = lastName;
+            partner.UserName = userName;
+            partnerDao.Save(partner);
+            
         }
     }
 }

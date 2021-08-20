@@ -1,11 +1,7 @@
 ﻿using Biblioseca.DataAccess;
 using Biblioseca.Model;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioseca.Service
 {
@@ -33,8 +29,7 @@ namespace Biblioseca.Service
 
         }
 
-        public Author Create(string name,string lastName)
-        {
+        public Author Create(string name,string lastName)        {
             
 
             IDictionary<string, object> parameters = new Dictionary<string, object>();
@@ -57,10 +52,25 @@ namespace Biblioseca.Service
             CheckService.BusinessLogic(authorId<=0, "El id del autor debe ser mayor a cero");
             Author author =  authorDao.Get(authorId);
             CheckService.Exists(author);
-            authorDao.Delete(author);
+            author.MarkAsDeleted();
+            authorDao.Save(author);
             return true;
 
         }
+
+        public void Update(int authorId, string firstName, string lastName)
+        {
+            CheckService.BusinessLogic(authorId <= 0, "El id del autor debe ser mayor a cero");
+            Author author = authorDao.Get(authorId);
+            CheckService.Exists(author);
+
+            author.FirstName = firstName;
+            author.LastName = lastName;
+
+            authorDao.Save(author);
+
+        }
+
 
     }
 }

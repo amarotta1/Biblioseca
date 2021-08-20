@@ -6,6 +6,8 @@ using Moq;
 using NHibernate;
 using System;
 using System.Collections.Generic;
+using NHibernate.Cfg;
+using NHibernate.Context;
 
 
 namespace TestBiblioseca
@@ -14,9 +16,9 @@ namespace TestBiblioseca
     public class BookServiceTest
     {
         private BookService bookService;
-        private Mock<LoanDao> loanDao;
+
         private Mock<BookDao> bookDao;
-        private Mock<PartnerDao> partnerDao;
+      
         private Mock<ISessionFactory> sessionFactory;
         private Mock<ISession> session;
 
@@ -24,10 +26,9 @@ namespace TestBiblioseca
         public void SetUp()
         {
             this.sessionFactory = new Mock<ISessionFactory>();
-            this.session = new Mock<ISession>();
-            this.loanDao = new Mock<LoanDao>(this.sessionFactory.Object);
+            this.session = new Mock<ISession>();           
             this.bookDao = new Mock<BookDao>(this.sessionFactory.Object);
-            this.partnerDao = new Mock<PartnerDao>(this.sessionFactory.Object);
+          
         }
 
         [TestMethod]
@@ -89,8 +90,6 @@ namespace TestBiblioseca
             this.bookDao.Setup(dao => dao.Get(bookId)).Returns(default(Book));
 
             this.bookService = new BookService(this.bookDao.Object);
-
-            ;
             Assert.ThrowsException<Exception>(() => this.bookService.GetBook(bookId),
                 "El objeto no existe");
 
@@ -115,6 +114,24 @@ namespace TestBiblioseca
 
             bool verification = bookService.ISBNVerification("8930275834");
             Assert.IsFalse(verification);
+
+        }
+
+        [TestMethod]
+        public void NotCreated()
+        {
+            ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+            ISession session = sessionFactory.OpenSession();
+            CurrentSessionContext.Bind(session);
+            CategoryDao catDao = new CategoryDao(sessionFactory);
+            AuthorDao authorDao = new AuthorDao(sessionFactory);
+            Category cat1 = catDao.Get(1);
+            Author author = authorDao.Get(1);
+            BookDao bookDao = new BookDao(sessionFactory);
+            BookService bookService = new BookService(bookDao);
+
+            Assert.ThrowsException<Exception>(() => bookService.Create("hola", "chau", "456sv48", author, cat1),
+                "El ISBN no es valido");           
 
         }
 

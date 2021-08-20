@@ -43,6 +43,7 @@ namespace Biblioseca.DataAccess
         {
             ICriteria criteria = this.Session.CreateCriteria<Book>();
             criteria.Add(Restrictions.Gt("stock",0)); //greater than
+            criteria.Add(Restrictions.Eq("Deleted", false));
             return criteria.List<Book>();
         }
 
