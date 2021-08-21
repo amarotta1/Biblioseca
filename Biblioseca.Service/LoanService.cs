@@ -35,11 +35,11 @@ namespace Biblioseca.Service
         {
             return loanDao.GetActualLoansByBookId(partnerId);
         }
-
+        /*
         public IEnumerable<Loan> GetByPartnerLastName(string partnerLastName)
         {
            return loanDao.GetByPartnerLastName(partnerLastName);
-        }
+        }*/
 
         public virtual IEnumerable<Loan> GetActualLoansByBookId(int bookId)
         {

@@ -62,10 +62,8 @@
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Penaltys\Invoice.cs" />
     <Compile Include="Loan.cs" />
     <Compile Include="Partner.cs" />
-    <Compile Include="Penaltys\Penalty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

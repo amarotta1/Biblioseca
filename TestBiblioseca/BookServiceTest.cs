@@ -135,6 +135,27 @@ namespace TestBiblioseca
 
         }
 
+        [TestMethod]
+        public void Deleted()
+        {
+
+            ISessionFactory sessionFactory = new Configuration().Configure().BuildSessionFactory();
+            ISession session = sessionFactory.OpenSession();
+            CurrentSessionContext.Bind(session);
+
+            BookDao bookDao = new BookDao(sessionFactory);
+            this.bookService = new BookService(bookDao);
+            Book b = bookDao.Get(1);
+            bookService.Delete(1);
+
+            Assert.IsTrue(b.Deleted);
+
+            b.Deleted = false; //para volverlo a poner bien
+            bookDao.Save(b);
+
+        }
+       
+
         private static Book GetBook()
         {
             Book book = new Book

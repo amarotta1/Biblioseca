@@ -29,7 +29,7 @@ namespace Biblioseca.Service
             return partner;
 
         }
-
+        /*
         public IEnumerable<Partner> GetByName(string partnerName)
         {
            
@@ -45,7 +45,7 @@ namespace Biblioseca.Service
         public Partner GetByUserName(string partnerUserName)
         {
             return partnerDao.GetByUserName(partnerUserName);
-        }
+        }*/
 
         public Partner Create(string name, string lastName, string userName)
         {
