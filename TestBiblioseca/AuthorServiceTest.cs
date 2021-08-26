@@ -57,10 +57,8 @@ namespace TestBiblioseca
         {
             const string name = "Juan";
             const string last = "Perez";
-            IDictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("FirstName", name);
-            parameters.Add("LastName", last);
-            this.authorDao.Setup(dao => dao.GetUniqueByHqlQuery("FROM Author WHERE FirstName = :FirstName and LastName = :LastName", parameters)).Returns(GetAuthor());
+            
+            this.authorDao.Setup(dao => dao.AuthorAllreadyExist(name,last)).Returns(GetAuthors());
             this.authorService = new AuthorService(this.authorDao.Object);
 
             Assert.ThrowsException<Exception>(() => this.authorService.Create(name,last),

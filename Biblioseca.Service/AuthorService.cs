@@ -1,6 +1,7 @@
 ﻿using Biblioseca.DataAccess;
 using Biblioseca.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Biblioseca.Service
@@ -35,10 +36,9 @@ namespace Biblioseca.Service
             IDictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("FirstName", name);
             parameters.Add("LastName", lastName);
-            Author author1 = authorDao.GetUniqueByHqlQuery("FROM Author WHERE FirstName = :FirstName and LastName = :LastName", parameters);
+            IEnumerable<Author> author1 = authorDao.AuthorAllreadyExist(name,lastName);
 
-
-            CheckService.BusinessLogic(author1 != null, "El autor ya existe");
+            CheckService.BusinessLogic(author1.Any(), "El autor ya existe");
 
             Author author = new Author();
             author.FirstName = name;

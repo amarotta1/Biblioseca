@@ -119,8 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Authors.aspx" />
-    <Content Include="Categorys.aspx" />
+    <Content Include="Author\Create.aspx" />
+    <Content Include="Author\Edit.aspx" />
+    <Content Include="Author\List.aspx" />
+    <Content Include="Book\AvailableBooks.aspx" />
+    <Content Include="BusinessError.aspx" />
+    <Content Include="Category\Categorys.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -140,6 +144,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Loan\Create.aspx" />
+    <Content Include="Loan\Loans.aspx" />
+    <Content Include="Loan\Returned.aspx" />
+    <Content Include="Partner\Partners.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -184,18 +192,46 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Authors.aspx.cs">
-      <DependentUpon>Authors.aspx</DependentUpon>
+    <Compile Include="Author\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Authors.aspx.designer.cs">
-      <DependentUpon>Authors.aspx</DependentUpon>
+    <Compile Include="Author\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Categorys.aspx.cs">
+    <Compile Include="Author\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Author\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Author\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Author\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Book\AvailableBooks.aspx.cs">
+      <DependentUpon>AvailableBooks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Book\AvailableBooks.aspx.designer.cs">
+      <DependentUpon>AvailableBooks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessError.aspx.cs">
+      <DependentUpon>BusinessError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessError.aspx.designer.cs">
+      <DependentUpon>BusinessError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Category\Categorys.aspx.cs">
       <DependentUpon>Categorys.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Categorys.aspx.designer.cs">
+    <Compile Include="Category\Categorys.aspx.designer.cs">
       <DependentUpon>Categorys.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
@@ -214,6 +250,35 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Loan\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loan\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loan\Loans.aspx.cs">
+      <DependentUpon>Loans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loan\Loans.aspx.designer.cs">
+      <DependentUpon>Loans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loan\Returned.aspx.cs">
+      <DependentUpon>Returned.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loan\Returned.aspx.designer.cs">
+      <DependentUpon>Returned.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages.cs" />
+    <Compile Include="Partner\Partners.aspx.cs">
+      <DependentUpon>Partners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Partner\Partners.aspx.designer.cs">
+      <DependentUpon>Partners.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

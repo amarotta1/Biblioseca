@@ -11,16 +11,16 @@ namespace Biblioseca.Web
 {
 
 
-    public partial class Authors
+    public partial class AvailableBooks
     {
 
         /// <summary>
-        /// Control GridViewAuthors.
+        /// Control GridViewAvailableBooks.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAuthors;
+        protected global::System.Web.UI.WebControls.GridView GridViewAvailableBooks;
     }
 }

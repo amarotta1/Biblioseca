@@ -35,8 +35,25 @@ namespace BibliosecaConsoleApp
             {
                 Console.WriteLine(a.Id);
             }
-            
-            Console.ReadKey();
+
+            LoanService loanService = new LoanService(lDao, bDao, pDao);
+            IEnumerable<Loan> actualLoans = loanService.GetActualLoansByPartnerID(1);
+
+            if (actualLoans.Any())
+            {
+                foreach (Loan loan in actualLoans)
+                {
+                    if (loan.book != null)
+                    {
+                        //books.Add(loan.book);
+                    }
+
+                }
+
+
+
+
+                Console.ReadKey();
            
             // Book b = bDao.Get(1);
             //b.IncreaseStock();

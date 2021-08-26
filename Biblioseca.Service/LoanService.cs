@@ -33,7 +33,7 @@ namespace Biblioseca.Service
         }
         public IEnumerable<Loan> GetActualLoansByPartnerID(int partnerId)
         {
-            return loanDao.GetActualLoansByBookId(partnerId);
+            return loanDao.GetActualLoansByPartnerID(partnerId);
         }
         /*
         public IEnumerable<Loan> GetByPartnerLastName(string partnerLastName)

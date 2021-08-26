@@ -29,7 +29,7 @@ namespace Biblioseca.DataAccess
             {
                 transaction = Session.BeginTransaction();
                 transaction.Commit();
-            }
+            }            
             
             //Session.GetCurrentTransaction().Commit();
             
